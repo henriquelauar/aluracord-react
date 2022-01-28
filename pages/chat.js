@@ -1,7 +1,7 @@
 import { Box, Text, TextField, Image, Button } from '@skynexui/components';
 import React from 'react';
 import appConfig from '../config.json';
-
+import { createClient } from '@supabase/supabase-js'
 
 function Background() {
     return (
@@ -11,13 +11,13 @@ function Background() {
             </video>
             <style jsx>{`
 				video {
-					position: absolute;
+                    position: absolute;
 					z-index: -100;
 					width: 100vw;
 					height: 100vh;
 					object-fit: cover;
 				}
-			`}</style>
+                `}</style>
         </>
     )
 }
@@ -26,17 +26,37 @@ export default function ChatPage() {
     const [mensagem, setMensagem] = React.useState('');
     const [listaDeMensagens, setListaDeMensagens] = React.useState([]);
 
+    const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzMwMTA4MiwiZXhwIjoxOTU4ODc3MDgyfQ.YaGNtv10q0GwljUyKzE8qNZWbI0KaItA3XG97_J3IEw'
+    const supabaseURL = 'https://bjbutrmryhucijziezxt.supabase.co'
+    const supabaseClient = createClient(supabaseURL, supabaseAnonKey)
+
+    React.useEffect(() => {
+        supabaseClient
+            .from('mensagens')
+            .select('*')
+            .order('id', { ascending: false })
+            .then(({ data }) => {
+                setListaDeMensagens(data);
+            });
+    }, []);
+
     function handleNovaMensagem(novaMensagem) {
         const mensagem = {
-            id: listaDeMensagens.length + 1,
             de: 'henriquelauar',
             texto: novaMensagem,
         };
 
-        setListaDeMensagens([
-            mensagem,
-            ...listaDeMensagens,
-        ]);
+        supabaseClient
+            .from('mensagens')
+            .insert([
+                mensagem
+            ])
+            .then(({ data }) => {
+                setListaDeMensagens([
+                    data[0],
+                    ...listaDeMensagens,
+                ]);
+            })
         setMensagem('');
     }
 
@@ -55,7 +75,7 @@ export default function ChatPage() {
                         flex: 1,
                         boxShadow: '0 2px 10px 0 rgb(0 0 0 / 20%)',
                         borderRadius: '5px',
-                        backgroundColor: appConfig.theme.colors.neutrals[400],
+                        backgroundColor: appConfig.theme.colors.neutrals[800],
                         height: '90%',
                         maxWidth: '85%',
                         maxHeight: '95vh',
@@ -111,7 +131,7 @@ export default function ChatPage() {
                                 }}
                             />
                             <Button
-                                styleSheet={{ marginBottom: '10px', }}
+                                styleSheet={{ marginBottom: '10px', borderRadius: '10%' }}
                                 type='submit'
                                 label='Enviar'
                                 onClick={(e) => {
@@ -135,14 +155,14 @@ export default function ChatPage() {
 function Header() {
     return (
         <>
-            <Box styleSheet={{ width: '100%', marginBottom: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }} >
+            <Box styleSheet={{ width: '100%', marginBottom: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', color: 'white', }} >
                 <Text variant='heading4'>
                     Chat
                 </Text>
                 <Button
                     buttonColors={{
                         contrastColor: appConfig.theme.colors.neutrals["000"],
-                        mainColor: appConfig.theme.colors.neutrals[800],
+                        mainColor: appConfig.theme.colors.neutrals[900],
                         mainColorLight: appConfig.theme.colors.primary[1000],
                         mainColorStrong: appConfig.theme.colors.primary[1000],
                     }}
@@ -171,7 +191,6 @@ function MessageList(props) {
             {props.mensagens.map((mensagem) => {
                 return (
 
-
                     <Text
                         key={mensagem.id}
                         tag="li"
@@ -184,11 +203,7 @@ function MessageList(props) {
                             }
                         }}
                     >
-                        <Box
-                            styleSheet={{
-                                marginBottom: '8px',
-                            }}
-                        >
+                        <Box>
                             <Image
                                 styleSheet={{
                                     width: '20px',
@@ -197,7 +212,7 @@ function MessageList(props) {
                                     display: 'inline-block',
                                     marginRight: '8px',
                                 }}
-                                src={`https://github.com/henriquelauar.png`}
+                                src={`https://github.com/${mensagem.de}.png`}
                             />
                             <Text tag="strong">
                                 {mensagem.de}
@@ -209,22 +224,19 @@ function MessageList(props) {
                                     }}
                                     tag="span"
                                 >
-                                    {(new Date().toLocaleDateString())}
+                                {mensagem.created_at.replace('T', ' | ').slice(0, -13)}
                                 </Text>
                                 <Button
-                                    onClick={(e) => {
-                                        
-                                    }}
                                     label='x'
-                                    styleSheet={{ marginLeft: '97.5%', bottom: '15px', width: '5px', height: '5px' }}
+                                    styleSheet={{ marginLeft: '97.5%', bottom: '15px', width: '10px', height: '10px', borderRadius: '30%', }}
                                     buttonColors={{
                                         contrastColor: appConfig.theme.colors.neutrals["000"],
                                         mainColor: appConfig.theme.colors.neutrals[800],
                                         mainColorLight: appConfig.theme.colors.primary[1000],
                                         mainColorStrong: appConfig.theme.colors.primary[1000],
-                                    }}></Button>
+                                    }}>
+                                </Button>
                             </Text>
-
                         </Box >
                         {mensagem.texto}
                     </Text>
