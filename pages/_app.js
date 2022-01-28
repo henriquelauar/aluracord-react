@@ -25,7 +25,6 @@ function GlobalStyle() {
 
     ::-webkit-scrollbar {
       width: 8px;
-      background: none;
     }
     
     ::-webkit-scrollbar-thumb {
@@ -33,7 +32,6 @@ function GlobalStyle() {
     }
     
     /* ./App fit Height */ 
-
 
   `}</style>
   );
