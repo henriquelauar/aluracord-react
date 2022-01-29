@@ -33,9 +33,9 @@ function GlobalStyle() {
     }
     strong {
      position: relative;
-     bottom: 8px
+     bottom: 8px;
     }
-    
+
     /* ./App fit Height */ 
 
   `}</style>

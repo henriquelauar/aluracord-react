@@ -5,12 +5,13 @@ import { createClient } from '@supabase/supabase-js'
 import { useRouter } from 'next/router'
 import { ButtonSendSticker } from '../components/ButtonSendSticker'
 import { IoMdSend } from "react-icons/io";
+import format from "date-fns/format";
 
 function Background() {
     return (
         <>
             <video autoPlay muted loop>
-                <source src="bluematrixtrim.mp4" type="video/mp4" />
+                <source src="./assets/bluematrixtrim.mp4" type="video/mp4" />
             </video>
             <style jsx>{`
 				video {
@@ -131,7 +132,6 @@ export default function ChatPage() {
                             }}
                         >
                             <TextField
-                                // label={<IoMdSend styleSheet={{display: 'flex', justifyContent:'center', alignItems: 'center'}} />}
                                 value={mensagem}
                                 onChange={(event) => {
                                     const valor = event.target.value;
@@ -153,28 +153,40 @@ export default function ChatPage() {
                                     borderRadius: '5px',
                                     padding: '6px 8px',
                                     backgroundColor: appConfig.theme.colors.neutrals[800],
-                                    marginRight: '12px',
+                                    marginRight: '4px',
                                     marginTop: '8px',
                                     color: appConfig.theme.colors.neutrals[200],
                                 }}
                             />
-                                
 
-                            {/* <Button
-                                styleSheet={{ marginBottom: '10px', borderRadius: '10%', height: '', }}
-                                type='submit'
-                                label='Enviar'
+                            <Button
                                 onClick={(e) => {
                                     e.preventDefault()
                                     handleNovaMensagem(mensagem);
                                 }}
+                                label={<IoMdSend size={`15px`} color="#E2E8F0" />}
+                                styleSheet={{
+                                    height: '48px',
+                                    width: '48px',
+                                    marginRight: '4px',
+                                    borderRadius: '0.4rem',
+                                    border: 'none',
+                                    background: '#181F25',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    transition: 'opacity 0.2s ease-in-out',
+                                    hover: {
+                                        opacity: '0.8',
+                                    }
+                                }}
                                 buttonColors={{
                                     contrastColor: appConfig.theme.colors.neutrals["000"],
-                                    mainColor: appConfig.theme.colors.primary[700],
-                                    mainColorLight: appConfig.theme.colors.primary[400],
-                                    mainColorStrong: appConfig.theme.colors.primary[600],
+                                    mainColor: appConfig.theme.colors.neutrals[900],
+                                    mainColorLight: appConfig.theme.colors.neutrals[700],
+                                    mainColorStrong: appConfig.theme.colors.neutrals[700],
                                 }}
-                            /> */}
+                            />
                             <ButtonSendSticker
                                 onStickerClick={(sticker) => {
                                     handleNovaMensagem(':sticker:' + sticker)
@@ -190,7 +202,6 @@ export default function ChatPage() {
 
 function Header() {
     return (
-
         <>
             <Box styleSheet={{
                 width: '100%',
@@ -212,8 +223,8 @@ function Header() {
                         borderRadius: '50%',
                         marginLeft: '75%',
                     }}
-                    src={`https://github.com/${}.png`}
-                /> */}
+                    src={`https://github.com/henriquelauar.png`}
+                 /> */}
                 <Button
                     buttonColors={{
                         contrastColor: appConfig.theme.colors.neutrals["000"],
@@ -228,8 +239,8 @@ function Header() {
         </>
     )
 }
-
 function MessageList(props) {
+
     return (
         <Box
             tag="ul"
@@ -243,6 +254,7 @@ function MessageList(props) {
             }}
         >
             {props.mensagens.map((mensagem) => {
+                const dateFormatted = format(new Date(mensagem.created_at), "dd/MM/yyyy HH:mm");
                 return (
                     <Text
                         key={mensagem.id}
@@ -256,7 +268,7 @@ function MessageList(props) {
                             }
                         }}
                     >
-                        <Box>
+                        <Box styleSheet={{ marginRight: '15px' }}>
                             <Image
                                 styleSheet={{
                                     width: '28px',
@@ -267,23 +279,32 @@ function MessageList(props) {
                                 }}
                                 src={`https://github.com/${mensagem.de}.png`}
                             />
-                            <Text tag="strong">
+                            <Text tag="strong" styleSheet={{ fontSize: 'smaller' }}>
                                 {mensagem.de}
                                 <Text
                                     styleSheet={{
-                                        fontSize: '12px',
+                                        fontSize: 'small',
                                         marginLeft: '8px',
                                         color: appConfig.theme.colors.neutrals[300],
                                     }}
                                     tag="span"
-                                >
-                                    {mensagem.created_at.replace('T', ' | ').slice(0, -13)}
+                                > <br /> 
+                                <Text 
+                                styleSheet={{
+                                    fontSize: 'small',
+                                    marginLeft: '35px',
+                                    color: appConfig.theme.colors.neutrals[300],
+                                }}>
+                                    {dateFormatted}</Text>
                                 </Text>
                                 <Button
                                     label='x'
                                     styleSheet={{
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
                                         marginLeft: '96%',
-                                        bottom: '2vh',
+                                        bottom: '3vh',
                                         width: '10px',
                                         height: '10px',
                                         borderRadius: '30%',
@@ -299,7 +320,7 @@ function MessageList(props) {
                         </Box>
                         {mensagem.texto.startsWith(':sticker:')
                             ? (
-                                <Image src={mensagem.texto.replace(':sticker:', '')} styleSheet={{ height: '170px' }} />
+                                <Image src={mensagem.texto.replace(':sticker:', '')} styleSheet={{ height: '20vh' }} />
                             ) :
                             (
                                 mensagem.texto

@@ -7,7 +7,7 @@ function Background() {
   return (
     <>
       <video autoPlay muted loop>
-        <source src="/bluematrixtrim.mp4" type="video/mp4" />
+        <source src="./assets/bluematrixtrim.mp4" type="video/mp4" />
       </video>
       <style jsx>{`
 				video {
