@@ -31,9 +31,27 @@ function GlobalStyle() {
       background: #52667A;
       border-radius: 0.4rem;
     }
+
     strong {
      position: relative;
      bottom: 8px;
+    }
+
+    p {
+      color: white;
+      font-size: small
+    }
+
+    @media only screen and (min-width: 960px) {
+      p {
+        margin-right: -30%
+      }
+    }
+
+    @media only screen and (min-width: 1365px) {
+      p {
+        margin-right: -35%
+      }
     }
 
     /* ./App fit Height */ 
