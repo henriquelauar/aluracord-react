@@ -5,6 +5,7 @@ import { createClient } from '@supabase/supabase-js'
 import { useRouter } from 'next/router'
 import { ButtonSendSticker } from '../components/ButtonSendSticker'
 import { IoMdSend } from "react-icons/io";
+import utcToZonedTime from 'date-fns-tz/utcToZonedTime';
 import format from "date-fns/format";
 
 function Background() {
@@ -86,6 +87,46 @@ export default function ChatPage() {
 
         setMensagem('');
     }
+    
+    function Header() {
+        return (
+            <>
+                <Box styleSheet={{
+                    width: '100%',
+                    marginBottom: '16px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    color: 'white',
+                    height: '34.8px',
+                }}
+                >
+                    <Text variant='heading3'>
+                        Chat
+                    </Text>
+                    <p>Logged in as <br/>{userLogado}</p>
+                        <Image
+                            styleSheet={{
+                                width: '40px',
+                                height: '40px',
+                                borderRadius: '50%',
+                            }}
+                            src={`https://github.com/${userLogado}.png`}
+                            /> 
+                    <Button
+                        buttonColors={{
+                            contrastColor: appConfig.theme.colors.neutrals["000"],
+                            mainColor: appConfig.theme.colors.neutrals[900],
+                            mainColorLight: appConfig.theme.colors.primary[1000],
+                            mainColorStrong: appConfig.theme.colors.primary[1000],
+                        }}
+                        label='Logout'
+                        href="/"
+                    />
+                </Box>
+            </>
+        )
+    }
 
     return (
         <>
@@ -109,7 +150,7 @@ export default function ChatPage() {
                         padding: '32px',
                     }}
                 >
-                    <Header />
+                    <Header />                  
                     <Box
                         styleSheet={{
                             display: 'flex',
@@ -200,45 +241,7 @@ export default function ChatPage() {
     )
 }
 
-function Header() {
-    return (
-        <>
-            <Box styleSheet={{
-                width: '100%',
-                marginBottom: '16px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                color: 'white',
-                height: '34.8px',
-            }}
-            >
-                <Text variant='heading3'>
-                    Chat
-                </Text>
-                {/* <Image
-                    styleSheet={{
-                        width: '40px',
-                        height: '40px',
-                        borderRadius: '50%',
-                        marginLeft: '75%',
-                    }}
-                    src={`https://github.com/henriquelauar.png`}
-                 /> */}
-                <Button
-                    buttonColors={{
-                        contrastColor: appConfig.theme.colors.neutrals["000"],
-                        mainColor: appConfig.theme.colors.neutrals[900],
-                        mainColorLight: appConfig.theme.colors.primary[1000],
-                        mainColorStrong: appConfig.theme.colors.primary[1000],
-                    }}
-                    label='Logout'
-                    href="/"
-                />
-            </Box>
-        </>
-    )
-}
+
 function MessageList(props) {
 
     return (
