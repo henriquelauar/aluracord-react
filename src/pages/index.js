@@ -134,7 +134,7 @@ export default function PaginaInicial() {
                 borderRadius: '50%',
                 marginBottom: '16px',
               }}
-              src={`https://github.com/${username}.png`}
+              src={username ? `https://github.com/${username}.png` : './assets/logotipo-do-github.png'}
             />
             <Text
               variant="body4"
