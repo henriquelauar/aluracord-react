@@ -17,6 +17,8 @@ O Aluracord Matrix é um projeto feito na Imersão React da Alura onde usamos o 
 ## Funcionalidades
 - Login com usuário do GitHub
 
+- Logout que redireciona para a página de login
+
 - Conexão do nome de usuário com a foto do perfil no GitHub
 
 - Enviar mensagens em tempo real
