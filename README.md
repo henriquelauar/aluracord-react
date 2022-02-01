@@ -12,7 +12,7 @@ O Aluracord Matrix é um projeto feito na Imersão React da Alura onde usamos o 
 
 
 ## Como ficou
-<img src="https://github.com/henriquelauar/aluracord-react/blob/master/public/assets/page_preview.gif"/>
+<img src="https://github.com/henriquelauar/aluracord-react/blob/master/public/assets/page-preview.gif"/>
 
 ## Funcionalidades
 - Login com usuário do GitHub
