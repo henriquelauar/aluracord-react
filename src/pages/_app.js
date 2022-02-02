@@ -38,19 +38,31 @@ function GlobalStyle() {
     }
 
     p {
-      color: white;
-      font-size: small
+      font-size: small;
+    }
+
+    @media only screen and (min-width: 576px) {
+      p {
+        margin-right: -20%;
+        font-size: smaller;
+      }
     }
 
     @media only screen and (min-width: 960px) {
       p {
-        margin-right: -30%
+        margin-right: -30%;
       }
     }
 
     @media only screen and (min-width: 1365px) {
       p {
-        margin-right: -35%
+        margin-right: -35%;
+      }
+    }
+
+    @media only screen and (min-width: 1920px) {
+      p {
+        margin-right: -55%;
       }
     }
 

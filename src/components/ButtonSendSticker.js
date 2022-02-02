@@ -23,6 +23,7 @@ export function ButtonSendSticker(props) {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
+          right: '30%',
           transition: 'opacity 0.2s ease-in-out',
           hover: {
             opacity: '0.8',
@@ -47,10 +48,10 @@ export function ButtonSendSticker(props) {
             position: 'absolute',
             backgroundColor: appConfig.theme.colors.neutrals[800],
             width: {
-              xs: '200px',
-              sm: '290px',
+              xs: '250px',
+              sm: '390px',
             },
-            height: '300px',
+            height: '450px',
             right: '30px',
             bottom: '30px',
             padding: '16px',

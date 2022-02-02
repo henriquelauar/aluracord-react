@@ -5,14 +5,14 @@ import { createClient } from '@supabase/supabase-js'
 import { useRouter } from 'next/router'
 import { ButtonSendSticker } from '../components/ButtonSendSticker'
 import { IoMdSend } from "react-icons/io";
-import utcToZonedTime from 'date-fns-tz/utcToZonedTime';
 import format from "date-fns/format";
+
 
 function Background() {
     return (
         <>
             <video autoPlay muted loop>
-                <source src="./assets/bluematrixtrim.mp4" type="video/mp4" />
+                <source src="./assets/interstellar0-background.mp4" type="video/mp4" />
             </video>
             <style jsx>{`
 				video {
@@ -57,7 +57,6 @@ export default function ChatPage() {
 
         const subscription = mensagensTempoReal((novaMensagem) => {
             setListaDeMensagens((valorAtualDaLista) => {
-                console.log('valorAtualDaLista:', valorAtualDaLista);
                 return [
                     novaMensagem,
                     ...valorAtualDaLista,
@@ -82,12 +81,11 @@ export default function ChatPage() {
                 mensagem
             ])
             .then(({ data }) => {
-                console.log('Criando mensagem: ', data);
-            });
 
+            });
         setMensagem('');
     }
-    
+
     function Header() {
         return (
             <>
@@ -104,15 +102,15 @@ export default function ChatPage() {
                     <Text variant='heading3'>
                         Chat
                     </Text>
-                    <p>Logged in as <br/>{userLogado}</p>
-                        <Image
-                            styleSheet={{
-                                width: '40px',
-                                height: '40px',
-                                borderRadius: '50%',
-                            }}
-                            src={`https://github.com/${userLogado}.png`}
-                            /> 
+                    <p>Logged in as <br />{userLogado}</p>
+                    <Image
+                        styleSheet={{
+                            width: '40px',
+                            height: '40px',
+                            borderRadius: '50%',
+                        }}
+                        src={`https://github.com/${userLogado}.png`}
+                    />
                     <Button
                         buttonColors={{
                             contrastColor: appConfig.theme.colors.neutrals["000"],
@@ -133,7 +131,7 @@ export default function ChatPage() {
             <Background />
             <Box
                 styleSheet={{
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: '0.9',
                 }}
             >
                 <Box
@@ -150,7 +148,7 @@ export default function ChatPage() {
                         padding: '32px',
                     }}
                 >
-                    <Header />                  
+                    <Header />
                     <Box
                         styleSheet={{
                             display: 'flex',
@@ -216,6 +214,7 @@ export default function ChatPage() {
                                     display: 'flex',
                                     justifyContent: 'center',
                                     alignItems: 'center',
+                                    right: '20px',
                                     transition: 'opacity 0.2s ease-in-out',
                                     hover: {
                                         opacity: '0.8',
@@ -239,99 +238,110 @@ export default function ChatPage() {
             </Box>
         </>
     )
-}
 
-
-function MessageList(props) {
-
-    return (
-        <Box
-            tag="ul"
-            styleSheet={{
-                overflowY: 'scroll',
-                display: 'flex',
-                flexDirection: 'column-reverse',
-                flex: 1,
-                color: appConfig.theme.colors.neutrals["000"],
-                marginBottom: '16px',
-            }}
-        >
-            {props.mensagens.map((mensagem) => {
-                const dateFormatted = format(new Date(mensagem.created_at), "dd/MM/yyyy HH:mm");
-                return (
-                    <Text
-                        key={mensagem.id}
-                        tag="li"
-                        styleSheet={{
-                            borderRadius: '5px',
-                            padding: '6px',
-                            marginBottom: '14px',
-                            hover: {
-                                backgroundColor: appConfig.theme.colors.neutrals[700],
-                            }
-                        }}
-                    >
-                        <Box styleSheet={{ marginRight: '15px' }}>
-                            <Image
-                                styleSheet={{
-                                    width: '28px',
-                                    height: '28px',
-                                    borderRadius: '50%',
-                                    display: 'inline-block',
-                                    marginRight: '12px',
-                                }}
-                                src={`https://github.com/${mensagem.de}.png`}
-                            />
-                            <Text tag="strong" styleSheet={{ fontSize: 'smaller' }}>
-                                {mensagem.de}
-                                <Text
+    function MessageList(props) {
+        return (
+            <Box
+                tag="ul"
+                styleSheet={{
+                    overflowY: 'scroll',
+                    display: 'flex',
+                    flexDirection: 'column-reverse',
+                    flex: 1,
+                    color: appConfig.theme.colors.neutrals["000"],
+                    marginBottom: '16px',
+                }}
+            >
+                {props.mensagens.map((mensagem) => {
+                    const dateFormatted = format(new Date(mensagem.created_at), "dd/MM/yyyy HH:mm");
+                    return (
+                        <Text
+                            key={mensagem.id}
+                            tag="li"
+                            styleSheet={{
+                                borderRadius: '5px',
+                                padding: '6px',
+                                marginBottom: '14px',
+                                hover: {
+                                    backgroundColor: appConfig.theme.colors.neutrals[700],
+                                }
+                            }}
+                        >
+                            <Box styleSheet={{ marginRight: '15px' }}>
+                                <Image
                                     styleSheet={{
-                                        fontSize: 'small',
-                                        marginLeft: '8px',
-                                        color: appConfig.theme.colors.neutrals[300],
+                                        width: '28px',
+                                        height: '28px',
+                                        borderRadius: '50%',
+                                        display: 'inline-block',
+                                        marginRight: '12px',
                                     }}
-                                    tag="span"
-                                > <br /> 
-                                <Text 
-                                styleSheet={{
-                                    fontSize: 'small',
-                                    marginLeft: '35px',
-                                    color: appConfig.theme.colors.neutrals[300],
-                                }}>
-                                    {dateFormatted}</Text>
+                                    src={`https://github.com/${mensagem.de}.png`}
+                                />
+                                <Text tag="strong" styleSheet={{ fontSize: 'smaller' }}>
+                                    {mensagem.de}
+                                    <Text
+                                        styleSheet={{
+                                            fontSize: 'small',
+                                            marginLeft: '8px',
+                                            color: appConfig.theme.colors.neutrals[300],
+                                        }}
+                                        tag="span"
+                                    > <br />
+                                        <Text
+                                            styleSheet={{
+                                                fontSize: 'small',
+                                                marginLeft: '35px',
+                                                color: appConfig.theme.colors.neutrals[300],
+                                            }}>
+                                            {dateFormatted}</Text>
+                                    </Text>
+                                    <Button
+                                        onClick={() => {
+                                            let resposta = confirm('Deseja remover essa mensagem?')
+                                            if (resposta === true) {
+                                                supabaseClient
+                                                    .from('mensagens')
+                                                    .delete()
+                                                    .match({ id: mensagem.id }).then(() => {
+                                                        let indice = listaDeMensagens.indexOf(mensagem);
+                                                        listaDeMensagens.splice(indice, 1)
+                                                        setListaDeMensagens([...listaDeMensagens])
+                                                    })
+                                            }
+                                        }}
+                                        label='x'
+                                        styleSheet={{
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                            marginLeft: '96%',
+                                            bottom: '3vh',
+                                            width: '10px',
+                                            height: '10px',
+                                            borderRadius: '30%',
+                                        }}
+                                        buttonColors={{
+                                            contrastColor: appConfig.theme.colors.neutrals["000"],
+                                            mainColor: appConfig.theme.colors.neutrals[800],
+                                            mainColorLight: appConfig.theme.colors.primary[1000],
+                                            mainColorStrong: appConfig.theme.colors.primary[1000],
+                                        }}>
+                                    </Button>
                                 </Text>
-                                <Button
-                                    label='x'
-                                    styleSheet={{
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                        marginLeft: '96%',
-                                        bottom: '3vh',
-                                        width: '10px',
-                                        height: '10px',
-                                        borderRadius: '30%',
-                                    }}
-                                    buttonColors={{
-                                        contrastColor: appConfig.theme.colors.neutrals["000"],
-                                        mainColor: appConfig.theme.colors.neutrals[800],
-                                        mainColorLight: appConfig.theme.colors.primary[1000],
-                                        mainColorStrong: appConfig.theme.colors.primary[1000],
-                                    }}>
-                                </Button>
-                            </Text>
-                        </Box>
-                        {mensagem.texto.startsWith(':sticker:')
-                            ? (
-                                <Image src={mensagem.texto.replace(':sticker:', '')} styleSheet={{ height: '20vh' }} />
-                            ) :
-                            (
-                                mensagem.texto
-                            )}
-                    </Text>
+                            </Box>
+                            {mensagem.texto.startsWith(':sticker:')
+                                ? (
+                                    <Image src={mensagem.texto.replace(':sticker:', '')} styleSheet={{ height: '20vh' }} />
+                                ) :
+                                (
+                                    mensagem.texto
+                                )}
+                        </Text>
 
-                );
-            })}
-        </Box>
-    )
+                    );
+                })}
+            </Box>
+        )
+    }
 }

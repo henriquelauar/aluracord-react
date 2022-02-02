@@ -7,7 +7,7 @@ function Background() {
   return (
     <>
       <video autoPlay muted loop>
-        <source src="./assets/bluematrixtrim.mp4" type="video/mp4" />
+        <source src="./assets/interstellar0-background.mp4" type="video/mp4" />
       </video>
       <style jsx>{`
 				video {
@@ -47,7 +47,7 @@ export default function PaginaInicial() {
       <Background />
       <Box
         styleSheet={{
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: '0.93',
         }}
       >
         <Box
