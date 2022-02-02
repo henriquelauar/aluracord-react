@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import { ButtonSendSticker } from '../components/ButtonSendSticker'
 import { IoMdSend } from "react-icons/io";
 import format from "date-fns/format";
+import Head from 'next/head'
 
 
 function Background() {
@@ -89,6 +90,11 @@ export default function ChatPage() {
     function Header() {
         return (
             <>
+                <Head>
+                    <title>Chat - Interstellar</title>
+                    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+                    <link rel="shortcut icon" href="./assets/head-logo.jpg" />
+                </Head>
                 <Box styleSheet={{
                     width: '100%',
                     marginBottom: '16px',
@@ -196,7 +202,7 @@ export default function ChatPage() {
                                     marginTop: '8px',
                                     color: appConfig.theme.colors.neutrals[200],
                                 }}
-                            />                            
+                            />
                             <Button
                                 onClick={(e) => {
                                     e.preventDefault()
@@ -295,39 +301,39 @@ export default function ChatPage() {
                                             }}>
                                             {dateFormatted}</Text>
                                     </Text>
-                                    { userLogado === mensagem.de ?
-                                    <Button
-                                        onClick={() => {
-                                            let resposta = confirm('Deseja remover essa mensagem?')
-                                            if (resposta === true) {
-                                                supabaseClient
-                                                    .from('mensagens')
-                                                    .delete()
-                                                    .match({ id: mensagem.id }).then(() => {
-                                                        let indice = listaDeMensagens.indexOf(mensagem);
-                                                        listaDeMensagens.splice(indice, 1)
-                                                        setListaDeMensagens([...listaDeMensagens])
-                                                    })
-                                            }
-                                        }}
-                                        label='x'
-                                        styleSheet={{
-                                            display: 'flex',
-                                            justifyContent: 'center',
-                                            alignItems: 'center',
-                                            marginLeft: '96%',
-                                            bottom: '3vh',
-                                            width: '10px',
-                                            height: '10px',
-                                            borderRadius: '30%',
-                                        }}
-                                        buttonColors={{
-                                            contrastColor: appConfig.theme.colors.neutrals["000"],
-                                            mainColor: appConfig.theme.colors.neutrals[800],
-                                            mainColorLight: appConfig.theme.colors.primary[1000],
-                                            mainColorStrong: appConfig.theme.colors.primary[1000],
-                                        }}>
-                                    </Button> : null}
+                                    {userLogado === mensagem.de ?
+                                        <Button
+                                            onClick={() => {
+                                                let resposta = confirm('Deseja remover essa mensagem?')
+                                                if (resposta === true) {
+                                                    supabaseClient
+                                                        .from('mensagens')
+                                                        .delete()
+                                                        .match({ id: mensagem.id }).then(() => {
+                                                            let indice = listaDeMensagens.indexOf(mensagem);
+                                                            listaDeMensagens.splice(indice, 1)
+                                                            setListaDeMensagens([...listaDeMensagens])
+                                                        })
+                                                }
+                                            }}
+                                            label='x'
+                                            styleSheet={{
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                                marginLeft: '96%',
+                                                bottom: '3vh',
+                                                width: '10px',
+                                                height: '10px',
+                                                borderRadius: '30%',
+                                            }}
+                                            buttonColors={{
+                                                contrastColor: appConfig.theme.colors.neutrals["000"],
+                                                mainColor: appConfig.theme.colors.neutrals[800],
+                                                mainColorLight: appConfig.theme.colors.primary[1000],
+                                                mainColorStrong: appConfig.theme.colors.primary[1000],
+                                            }}>
+                                        </Button> : null}
                                 </Text>
                             </Box>
                             {mensagem.texto.startsWith(':sticker:')

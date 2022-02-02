@@ -2,6 +2,7 @@ import { Box, Button, Text, TextField, Image } from '@skynexui/components';
 import React from 'react';
 import { useRouter } from 'next/router';
 import appConfig from '../../config.json';
+import Head from 'next/head'
 
 function Background() {
   return (
@@ -11,13 +12,13 @@ function Background() {
       </video>
       <style jsx>{`
 				video {
-					position: absolute;
+          position: absolute;
 					z-index: -100;
 					width: 100vw;
 					height: 100vh;
 					object-fit: cover;
 				}
-			`}</style>
+        `}</style>
     </>
   )
 }
@@ -29,9 +30,9 @@ function Titulo(props) {
       <Tag>{props.children}</Tag>
       <style jsx>{`
             ${Tag} {
-                color: ${appConfig.theme.colors.neutrals['100']};
-                font-size: 28px;
-                font-weight: 700;
+              color: ${appConfig.theme.colors.neutrals['100']};
+              font-size: 28px;
+              font-weight: 700;
             }
             `}</style>
     </>
@@ -45,6 +46,11 @@ export default function PaginaInicial() {
   return (
     <>
       <Background />
+      <Head>
+        <title>Aluracord Interstellar</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <link rel="shortcut icon" href="./assets/head-logo.jpg" />
+      </Head>
       <Box
         styleSheet={{
           display: 'flex', alignItems: 'center', justifyContent: 'center',
