@@ -196,8 +196,7 @@ export default function ChatPage() {
                                     marginTop: '8px',
                                     color: appConfig.theme.colors.neutrals[200],
                                 }}
-                            />
-
+                            />                            
                             <Button
                                 onClick={(e) => {
                                     e.preventDefault()
@@ -296,6 +295,7 @@ export default function ChatPage() {
                                             }}>
                                             {dateFormatted}</Text>
                                     </Text>
+                                    { userLogado === mensagem.de ?
                                     <Button
                                         onClick={() => {
                                             let resposta = confirm('Deseja remover essa mensagem?')
@@ -327,7 +327,7 @@ export default function ChatPage() {
                                             mainColorLight: appConfig.theme.colors.primary[1000],
                                             mainColorStrong: appConfig.theme.colors.primary[1000],
                                         }}>
-                                    </Button>
+                                    </Button> : null}
                                 </Text>
                             </Box>
                             {mensagem.texto.startsWith(':sticker:')

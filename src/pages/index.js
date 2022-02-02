@@ -29,9 +29,9 @@ function Titulo(props) {
       <Tag>{props.children}</Tag>
       <style jsx>{`
             ${Tag} {
-                color: ${appConfig.theme.colors.neutrals['700']};
-                font-size: 24px;
-                font-weight: 600;
+                color: ${appConfig.theme.colors.neutrals['100']};
+                font-size: 28px;
+                font-weight: 700;
             }
             `}</style>
     </>
@@ -47,7 +47,7 @@ export default function PaginaInicial() {
       <Background />
       <Box
         styleSheet={{
-          display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: '0.93',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
         }}
       >
         <Box
@@ -57,12 +57,10 @@ export default function PaginaInicial() {
             justifyContent: 'space-between',
             flexDirection: {
               xs: 'column',
-              sm: 'row',
+              sm: 'column',
             },
             width: '100%', maxWidth: '700px',
             borderRadius: '5px', padding: '32px', margin: '16px',
-            boxShadow: '0 2px 10px 0 rgb(0 0 0 / 20%)',
-            backgroundColor: appConfig.theme.colors.neutrals[100],
           }}
         >
           {/* Formulário */}
@@ -77,8 +75,8 @@ export default function PaginaInicial() {
               width: { xs: '100%', sm: '50%' }, textAlign: 'center', marginBottom: '32px',
             }}
           >
-            <Titulo tag="h2">Boas vindas de volta!</Titulo>
-            <Text variant="body3" styleSheet={{ marginBottom: '32px', color: appConfig.theme.colors.neutrals[600] }}>
+            <Titulo>Welcome to Interstellar</Titulo>
+            <Text variant="body1" styleSheet={{ marginBottom: '32px', color: appConfig.theme.colors.neutrals[100] }}>
               {appConfig.name}
             </Text>
 
@@ -134,7 +132,7 @@ export default function PaginaInicial() {
                 borderRadius: '50%',
                 marginBottom: '16px',
               }}
-              src={username ? `https://github.com/${username}.png` : './assets/logotipo-do-github.png'}
+              src={username ? `https://github.com/${username}.png` : './assets/logo-interstellar.jpg'}
             />
             <Text
               variant="body4"
