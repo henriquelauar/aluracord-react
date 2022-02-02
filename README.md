@@ -1,7 +1,7 @@
-# Aluracord Matrix
+# Aluracord Interstellar
 
 ## Sobre
-O Aluracord Matrix é um projeto feito na Imersão React da Alura onde usamos o Supabase como banco de dados e pegamos informações direto da API do GitHub.
+O Aluracord-Interstellar é um projeto com o tema do filme Interstellar feito na Imersão React da Alura onde usamos o Supabase como banco de dados e pegamos informações direto da API do GitHub.
 
 ## Tecnologias
 - Next.js <img src="https://github.com/henriquelauar/aluracord-react/blob/master/public/assets/next-js.png" width="20px" height="20px"/>
@@ -21,7 +21,7 @@ O Aluracord Matrix é um projeto feito na Imersão React da Alura onde usamos o 
 
 - Conexão do nome de usuário com a foto do perfil no GitHub
 
-- Enviar mensagens em tempo real
+- Enviar e apagar mensagens em tempo real
 
 - Marcador de data e hora de envio de mensagens
 
@@ -32,7 +32,7 @@ O Aluracord Matrix é um projeto feito na Imersão React da Alura onde usamos o 
 ## Futuras implementações
 
 - Utilizar API do Github para autenticar o usuário
-- Apagar e editar mensagens
+- Editar mensagens
 - Popover com informações do perfil do usuário no Github (seguidores, repositórios, etc)
 
 ## Contribuidores
