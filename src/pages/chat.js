@@ -7,7 +7,7 @@ import { ButtonSendSticker } from '../components/ButtonSendSticker'
 import { IoMdSend } from "react-icons/io";
 import format from "date-fns/format";
 import Head from 'next/head'
-
+import { MdOutlineDeleteOutline } from "react-icons/md";
 
 function Background() {
     return (
@@ -108,7 +108,6 @@ export default function ChatPage() {
                     <Text variant='heading3'>
                         Chat
                     </Text>
-                    <p>Logged in as <br />{userLogado}</p>
                     <Image
                         styleSheet={{
                             width: '40px',
@@ -316,15 +315,15 @@ export default function ChatPage() {
                                                         })
                                                 }
                                             }}
-                                            label='x'
+                                            label={<MdOutlineDeleteOutline size={`15px`} color="#E2E8F0" />}
                                             styleSheet={{
                                                 display: 'flex',
                                                 justifyContent: 'center',
                                                 alignItems: 'center',
                                                 marginLeft: '96%',
                                                 bottom: '3vh',
-                                                width: '10px',
-                                                height: '10px',
+                                                width: '15px',
+                                                height: '15px',
                                                 borderRadius: '30%',
                                             }}
                                             buttonColors={{

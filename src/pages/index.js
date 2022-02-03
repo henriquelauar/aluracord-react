@@ -1,4 +1,4 @@
-import { Box, Button, Text, TextField, Image } from '@skynexui/components';
+import { Box, Button, Text, TextField, Image, Icon } from '@skynexui/components';
 import React from 'react';
 import { useRouter } from 'next/router';
 import appConfig from '../../config.json';
@@ -74,7 +74,11 @@ export default function PaginaInicial() {
             as="form"
             onSubmit={function (infosDoEvento) {
               infosDoEvento.preventDefault();
-              router.push(`/chat?username=${username}`);
+              if (username.length > 2) {
+                router.push(`/chat?username=${username}`);
+              } else {
+                window.alert('Invalid User')
+              }
             }}
             styleSheet={{
               display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
@@ -123,7 +127,7 @@ export default function PaginaInicial() {
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              maxWidth: '200px',
+              maxWidth: '250px',
               padding: '16px',
               backgroundColor: appConfig.theme.colors.neutrals[800],
               border: '1px solid',
