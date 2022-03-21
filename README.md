@@ -6,7 +6,6 @@ O Aluracord-Interstellar é um projeto com o tema do filme Interstellar feito na
 ## Tecnologias
 - Next.js <img src="https://github.com/henriquelauar/aluracord-react/blob/master/public/assets/next-js.png" width="20px" height="20px"/>
 
-- React JS <img src="https://github.com/henriquelauar/aluracord-react/blob/master/public/assets/react.png" width="20px" height="20px"/>
 
 - Supabase <img src="https://github.com/henriquelauar/aluracord-react/blob/master/public/assets/supabase.jpg" width="20px" height="20px"/>
 
